@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "tfb/buyer/buyer.proto";
+
+option go_package = "github.com/tfb-project/buyer-service";
+
+
+service BuyerService{
+  rpc Get (GetBuyerRequest) returns (Buyer) {
+    option (google.api.http) = {get: "/buyers/{buyer_id}"};
+  }
+  rpc List (ListBuyersRequest) returns (ListBuyersResponse) {
+    option (google.api.http) = {get: "/buyers"};
+  }
+  rpc Create (CreateBuyerRequest) returns (Buyer) {
+    option (google.api.http) = {post: "/buyers"};
+  }
+}
+
+message GetBuyerRequest {
+  string id = 1;
+}
+
+message CreateBuyerRequest{
+  string name = 1;
+  string link = 2;
+}
+
+message ListBuyersRequest{
+  int64 page_size = 2;
+  string page_token = 3;
+}
+
+message ListBuyersResponse {
+  repeated Buyer buyers = 1;
+  string next_page_token = 2;
+}

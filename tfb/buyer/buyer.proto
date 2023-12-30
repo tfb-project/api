@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option go_package = "github.com/tfb-project/buyer-service";
+
+message Buyer{
+  string id = 1;
+  string user_id = 2;
+  string name = 3;
+  string link = 4;
+}
